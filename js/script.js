@@ -2,11 +2,13 @@
 // Globals
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 let salary = 0;
+let band = 0;
+let cumulativeSampleSize = 0;
 let substring = "";
 let string = "";
-//var data = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4,5,1,1,3,2,2,2,4,2,0,2,3,4,2,1];
-var data = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4];
-
+const data_full = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4,5,1,1,3,2,2,2,4,2,0,2,3,4,2,1];
+const data = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4];
+const data_full_total = 2975;
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Add commas to values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -23,11 +25,26 @@ function addCommas(x) {
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 document.querySelectorAll('.user-input-field').forEach(item => {
     item.addEventListener('keyup', function(event) {
-        item.style.animation = "";
-        salary = Number(event.target.value.replace(",",""));
-        //event.target.value = addCommas(event.target.value);
         d = 0.05;
         s = 11000;
+        cumulativeSampleSize = 0;
+        item.style.animation = "";
+        salary = Number(event.target.value.replace(",",""));
+        band = (salary-s)/890;
+        for (j=0; j<band; j++) {
+            cumulativeSampleSize = cumulativeSampleSize + data_full[j];
+        }
+        if (salary > 100000) {
+            userPercentile = 99;
+        }
+        else {
+            userPercentile = Math.round(cumulativeSampleSize/data_full_total*100)-1;
+        }
+        document.getElementById('user-percentile').textContent = "" + userPercentile + "%";
+        
+
+        //event.target.value = addCommas(event.target.value);
+        
         document.querySelectorAll('.percentile').forEach(item => {
             s = s + 890;
             d = d + 0.02;
@@ -88,7 +105,7 @@ function revealBlock(item) {
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Render bars on page load
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-for (var i = 0; i < data.length; i++) {
+for (var i = 0; i < data.length; i+=1) {
     substring = "<div class='percentile' style='height: "+data[i]+"px'></div>"
     string = string + substring;
 }
