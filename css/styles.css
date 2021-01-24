@@ -45,7 +45,7 @@ input[type=text] {
     color: var(--primary);
     font-size: 3rem;
     outline: none;
-    width: auto;
+    width: 60%;
     font-weight: bold;
     font-family: 'IBM Plex Sans', sans-serif;
     animation: pulse 2s infinite;
