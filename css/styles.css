@@ -38,6 +38,9 @@ stress-secondary {
 .m1 {
     margin-top: 1em;
 }
+html { /* body won't work ¯\_(ツ)_/¯ */
+    scroll-snap-type: y mandatory;
+  }
 body {
     background: black;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -49,11 +52,17 @@ body {
 }
 
 #container {
-    padding-top: 2em;
     width: 90%;
     max-width: 600px;
     margin: auto;
     margin-bottom: 10em;
+}
+.snap {
+    scroll-snap-align: start;
+    border: 1px solid red;
+    scroll-snap-type: y proximity;
+    min-height: 100vh;
+    padding-top: 4em;
 }
 divider {
     /* border-bottom: 5px solid var(--text2); */
@@ -124,7 +133,7 @@ input[type=text]:focus-visible {
     opacity: 0;
 }
 h2 {
-    margin-top: 4em;
+
 }
 
 :root {
