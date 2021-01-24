@@ -19,7 +19,7 @@ function addCommas(x) {
     return parts.join(".");
 }
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-// User input event listener
+// User input event listener 
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 document.querySelectorAll('.user-input-field').forEach(item => {
     item.addEventListener('keyup', function(event) {
