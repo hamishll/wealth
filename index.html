@@ -14,10 +14,10 @@
 </head>
 <body>
     <div id="container">
-        <div id="salary-prompt">
+        <div  id="salary-prompt">
             <h2 class="reveal-text">How much do you make per year?</h2>
-            <div class="user-input reveal-text d1">
-                £<input type="text" class="user-input-field" id="salary" name="salary" placeholder="XX,XXX">
+            <div class="user-input primary reveal-text d1">
+                £<input type="text" class="user-input-field primary" id="salary" name="salary" placeholder="XX,XXX">
             </div>
             <div class="m1 reveal-text d2">
                 <input type="range" min="0" max="100000" value="10000" class="slider" id="salarySlider">
@@ -30,13 +30,30 @@
             <h3 style="display:none">You earn more than...</h3>
             <h1 style="display:none; animation: pulsegradient 2s infinite" class="primary" id="user-percentile">XX%</h1>
             <h3 style="display:none">...of people in the UK</h3>
+            <divider></divider>
+        </div>
+        
+        <div id="savings-prompt">
+            <h2 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h2>
+            <div class="user-input secondary reveal-text-secondary">
+                £<input type="text" class="user-input-field secondary reveal-text-secondary" id="savings" name="salary" placeholder="XXX">
+            </div>
+        </div>
+        
+        <div id="savings-comparison">
+            <h3 class="reveal-text-secondary" style="display:none">You save more than...</h3>
+            <h1 class="reveal-text-secondary secondary" style="display:none; animation: pulsegradient 2s infinite" id="user-percentile">XX%</h1>
+            <h3 class="reveal-text-secondary" style="display:none">...of people in the UK</h3>
+            <divider></divider>
         </div>
 
-        <div id="savings-prompt">
-            <h2>How much do you save per month?</h2>
-            <div class="user-input">
-                £<input type="text" class="user-input-field" id="savings" name="salary" placeholder="XXX">
-            </div>
+        <div id="tips">
+            <h2 style="display:none">Want to <stress>boost</stress> your financial health?</h2>
+            <h3 style="display:none">Tip #1</h3>
+            <h3 style="display:none">Tip #2</h3>
+            <h3 style="display:none">Tip #3</h3>
+            <h3 style="display:none">Tip #4</h3>
+            <h3 style="display:none">Tip #5</h3>
         </div>
 
     </div>

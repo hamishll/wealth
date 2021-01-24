@@ -2,6 +2,7 @@
 // Globals
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 let salary = 0;
+let savings = 0;
 let band = 0;
 let cumulativeSampleSize = 0;
 let substring = "";
@@ -34,13 +35,16 @@ document.getElementById('salarySlider').addEventListener("change", function(even
 document.getElementById('salary').addEventListener("keyup", function(event) {
     updateSalary();
 });
-
+// `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+// Salary: Compute values
+// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 function updateSalary() {
     d = 0.05;
     s = 11000;
     cumulativeSampleSize = 0;
     document.getElementById('salary').style.animation = "none";
     salary = Number(event.target.value.replace(",",""));
+    document.getElementById('salarySlider').value = salary;
     band = (salary-s)/890;
     for (j=0; j<band; j++) {
         cumulativeSampleSize = cumulativeSampleSize + data_full[j];
@@ -55,9 +59,6 @@ function updateSalary() {
         userPercentile = Math.round(cumulativeSampleSize/data_full_total*100)-1;
     }    
     document.getElementById('user-percentile').textContent = "" + userPercentile + "%";
-    
-
-    //event.target.value = addCommas(event.target.value);
     
     document.querySelectorAll('.percentile').forEach(item => {
         s = s + 890;
@@ -81,19 +82,27 @@ function updateSalary() {
     };
 };
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+// Savings: Typed value event listener 
+// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+document.getElementById('savings').addEventListener("keyup", function(event) {
+    updateSavings(this);
+    revealBlock(document.getElementById('savings-comparison'));
+    document.getElementById('savings').style.animation = "none";
+});
+// `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+// Savings: Update values
+// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+function updateSavings(item) {
+    savings = item.value;
+};
+
+// `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Scroll event listener
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 let last_known_scroll_position = 0;
 let ticking = false;
-let triggered = false;
-
-function doSomething(scrollPos) {
-    //console.log(scrollPos);
-    if (scrollPos > 100 && salary > 0 && !triggered) {
-        revealBlock(document.getElementById('savings-prompt'));
-        triggered = true;
-    }
-  }
+let savings_triggered = false;
+let tips_triggered = false;
 
 document.addEventListener('scroll', function(e) {
   last_known_scroll_position = window.scrollY;
@@ -107,6 +116,19 @@ document.addEventListener('scroll', function(e) {
     ticking = true;
   }
 });
+// `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+// Scroll triggers
+// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+function doSomething(scrollPos) {
+    //console.log(scrollPos);
+    if (scrollPos > 100 && salary > 0 && !savings_triggered) {
+        revealBlock(document.getElementById('savings-prompt'));
+        savings_triggered = true;
+    }
+    else if (scrollPos > 200 && savings > 0 && !tips_triggered) {
+        revealBlock(document.getElementById('tips'));
+    }
+  }
 
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Reveal blocks
@@ -115,6 +137,7 @@ function revealBlock(item) {
     for (let i = 1; i < item.childNodes.length; i+= 2) {
         item.childNodes[i].style.display = "block";
         item.childNodes[i].classList.add('reveal-text');
+        // item.childNodes[i].style.animationDelay = i*1;
         item.childNodes[i].style.opacity = 1;
     }
 }

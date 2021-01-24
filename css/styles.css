@@ -22,10 +22,18 @@
     color: var(--accent4);
 }
 .primary {
-    color: var(--primary);
+    color: var(--primary) !important;
 }
 .secondary {
     color: var(--secondary);
+}
+stress {
+    color: var(--primary);
+    font-style: italic;
+}
+stress-secondary {
+    color: var(--secondary);
+    font-style: italic;
 }
 .m1 {
     margin-top: 1em;
@@ -45,12 +53,16 @@ body {
     width: 90%;
     max-width: 600px;
     margin: auto;
+    margin-bottom: 10em;
 }
-
+divider {
+    /* border-bottom: 5px solid var(--text2); */
+    margin-top: 2em;
+}
 input[type=text] {
     background:transparent;
     border: none;
-    color: var(--primary);
+    /* color: var(--primary); */
     font-size: 3rem;
     outline: none;
     width: 60%;
@@ -78,7 +90,7 @@ input[type=text]:focus-visible {
 .user-input {
     font-size: 3rem;
     font-weight: bold;
-    color: var(--primary);
+    /* color: var(--primary); */
 }
 
 #salary-distribution {
@@ -153,6 +165,9 @@ h2 {
 		transform-origin: 0 50%;
 		pointer-events: none;
 		animation-name: text-revealer;
+}
+.reveal-text-secondary::after {
+    background-color: var(--secondary) !important;
 }
 @keyframes clip-text {
 	from {
