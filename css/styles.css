@@ -59,7 +59,7 @@ body {
 }
 .snap {
     scroll-snap-align: start;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     scroll-snap-type: y proximity;
     min-height: 100vh;
     padding-top: 4em;
