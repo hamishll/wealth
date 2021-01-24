@@ -39,28 +39,51 @@ document.querySelectorAll('.user-input-field').forEach(item => {
             else if (salary > 10000) {
                 item.style.transitionDelay = ""+d+"s";
                 item.style.opacity = 1;
-                triggerJourney2();
+                
             }
             else {};
         });
+        if (salary > 10000) {
+            revealBlock(document.getElementById('salary-comparison'));
+        };
     });
 });
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Scroll event listener
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-document.addEventListener('scroll',function(e) {
+let last_known_scroll_position = 0;
+let ticking = false;
+let triggered = false;
 
+function doSomething(scrollPos) {
+    if (scrollPos > 100 && !triggered) {
+        revealBlock(document.getElementById('savings-prompt'));
+        triggered = true;
+    }
+  }
+
+document.addEventListener('scroll', function(e) {
+  last_known_scroll_position = window.scrollY;
+
+  if (!ticking) {
+    window.requestAnimationFrame(function() {
+      doSomething(last_known_scroll_position);
+      ticking = false;
+    });
+
+    ticking = true;
+  }
 });
 
-
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-// User Journey - Savings
+// Reveal blocks
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-function triggerJourney2() {
-    document.getElementById('saving-prompt').style.opacity = 1;
-    document.getElementById('saving-prompt').classList.add('reveal-text');
+function revealBlock(item) {
+    for (let i = 1; i < item.childNodes.length; i+= 2) {
+        item.childNodes[i].style.display = "block";
+        item.childNodes[i].classList.add('reveal-text');
+    }
 }
-
 
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Render bars on page load

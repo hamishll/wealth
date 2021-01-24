@@ -60,7 +60,7 @@ input[type=text]:focus-visible {
 	0% {
 		opacity: 50%
     }
-    3% {
+    30% {
         opacity: 100%
     }
     100% {
@@ -74,7 +74,6 @@ input[type=text]:focus-visible {
 }
 
 #salary-distribution {
-    margin-top: 2em;
     display: flex;
     align-items: flex-end;
 }
@@ -103,6 +102,9 @@ input[type=text]:focus-visible {
 #saving-prompt {
     opacity: 0;
 }
+h2 {
+    margin-top: 4em;
+}
 
 :root {
 	--delay: 0.5s;
@@ -114,7 +116,7 @@ input[type=text]:focus-visible {
 
 .reveal-text,
 .reveal-text::after {
-	animation-delay: var(--animation-delay, 2s);
+	/* animation-delay: var(--animation-delay, 2s); */
 	animation-iteration-count: var(--iterations, 1);
 	animation-duration: var(--duration, 800ms);
 	animation-fill-mode: both;
@@ -122,7 +124,7 @@ input[type=text]:focus-visible {
 }
 
 .reveal-text {
-	--animation-delay: var(--delay, 0);
+	/* --animation-delay: var(--delay, 0); */
 	--animation-duration: var(--duration, 800ms);
 	--animation-iterations: var(--iterations, 1);
 	position: relative;
