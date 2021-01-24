@@ -56,11 +56,12 @@ body {
     max-width: 600px;
     margin: auto;
     margin-bottom: 10em;
+    -webkit-overflow-scrolling: touch;
 }
 .snap {
     scroll-snap-align: start;
     /* border: 1px solid red; */
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory;
     min-height: 100vh;
     padding-top: 4em;
 }
