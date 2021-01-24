@@ -1,0 +1,177 @@
+:root {
+    --primary:   #6002ee;
+    --secondary: #90ee02;
+    --accent1:   #021aee;
+    --accent2:   #d602ee;
+    --accent3:   #ee0290;
+    --accent4:   #ee6002;
+    --text:      white;
+    --text2:     #333;
+    --bg:        black;
+}
+.accent1 {
+    color: var(--accent1);
+}
+.accent2 {
+    color: var(--accent2);
+}
+.accent3 {
+    color: var(--accent3);
+}
+.accent4 {
+    color: var(--accent4);
+}
+
+body {
+    background: black;
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    font-size: 1.5em;
+    transition: 0.4s;
+}
+
+#container {
+    padding-top: 2em;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+input[type=text] {
+    background:transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 3rem;
+    outline: none;
+    width: 80%;
+    font-weight: bold;
+    font-family: 'IBM Plex Sans', sans-serif;
+    animation: pulse 2s infinite;
+    -webkit-animation: pulse 2s infinite;
+    /* font-style: italic; */
+}
+input[type=text]:focus-visible {
+    /* background: rgba(255,255,255,0.1); */
+}
+@keyframes pulse {
+	
+	0% {
+		opacity: 50%
+    }
+    3% {
+        opacity: 100%
+    }
+    100% {
+        opacity: 50%
+    }
+}
+.user-input {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+#salary-distribution {
+    margin-top: 2em;
+    display: flex;
+    align-items: flex-end;
+}
+.percentile {
+    opacity: 0;
+    background: var(--text2);
+    width: 1%;
+    height: 10px;
+    margin-right: 2px;
+    border-radius: 1em;
+    transition: 1s;
+}
+.percentile-grey {
+    background: var(--text2);
+}
+.d1,
+.d1::after {
+    transition-delay: 1s;
+    animation-delay: 1s !important;
+}
+.d2,
+.d2::after {
+    transition-delay: 2s;
+    animation-delay: 2s !important;
+}
+#saving-prompt {
+    opacity: 0;
+}
+
+:root {
+	--delay: 0.5s;
+	--duration: 1000ms;
+	--iterations: 1;
+}
+/* •·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•·•· */
+
+
+.reveal-text,
+.reveal-text::after {
+	animation-delay: var(--animation-delay, 2s);
+	animation-iteration-count: var(--iterations, 1);
+	animation-duration: var(--duration, 800ms);
+	animation-fill-mode: both;
+	animation-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+}
+
+.reveal-text {
+	--animation-delay: var(--delay, 0);
+	--animation-duration: var(--duration, 800ms);
+	--animation-iterations: var(--iterations, 1);
+	position: relative;
+	animation-name: clip-text;
+	/* white-space: nowrap; */
+	cursor: default;
+}
+.reveal-text::after {
+		content: "";
+		position: absolute;
+		z-index: 999;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: var(--primary);
+		transform: scaleX(0);
+		transform-origin: 0 50%;
+		pointer-events: none;
+		animation-name: text-revealer;
+}
+
+
+@keyframes clip-text {
+	from {
+		clip-path: inset(0 100% 0 0);
+	}
+	to {
+		clip-path: inset(0 0 0 0);
+	}
+}
+
+
+@keyframes text-revealer {
+	
+	0%, 50% {
+		transform-origin: 0 50%;
+	}
+	
+	60%, 100% {
+		transform-origin: 100% 50%;		
+	}
+
+	
+	60% {
+		transform: scaleX(1);
+	}
+	
+	100% {
+		transform: scaleX(0);
+	}
+}
