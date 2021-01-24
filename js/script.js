@@ -10,7 +10,7 @@ const data_full = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69
 const data = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4];
 const data_full_total = 2975;
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-// Add commas to values
+// DEPRECATED: Add commas to values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 function addCommas(x) {
     x = x.replace(",","");
@@ -21,7 +21,7 @@ function addCommas(x) {
     return parts.join(".");
 }
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-// Slider event listener
+// Salary: Slider event listener
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 document.getElementById('salarySlider').addEventListener("change", function(event) {
     salary = this.value;
@@ -29,9 +29,9 @@ document.getElementById('salarySlider').addEventListener("change", function(even
     updateSalary();
 });
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-// Typed value event listener 
+// Salary: Typed value event listener 
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-document.getElementById('salarySlider').addEventListener("change", function(event) {
+document.getElementById('salary').addEventListener("keyup", function(event) {
     updateSalary();
 });
 
@@ -48,7 +48,7 @@ function updateSalary() {
     if (salary >= 100000) {
         userPercentile = 99;
     }
-    else if (salary < 1){
+    else if (salary < 10000){
         userPercentile = 0;
     }
     else {
@@ -67,7 +67,7 @@ function updateSalary() {
             item.style.background = "var(--primary)";
             item.style.transitionDelay = ""+d+"s";
         }
-        else if (salary > 10000) {
+        else if (salary > data_full_total) {
             item.style.transitionDelay = ""+d+"s";
             item.style.opacity = 1;
             item.style.background = "var(--text2)";
@@ -76,7 +76,7 @@ function updateSalary() {
             item.style.background = "var(--text2)";
         };
     });
-    if (salary > 10000) {
+    if (salary > data_full_total) {
         revealBlock(document.getElementById('salary-comparison'));
     };
 };
