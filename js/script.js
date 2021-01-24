@@ -64,7 +64,7 @@ function updateSalary() {
         d = d + 0.01;
         if (salary > s) {
             item.style.opacity = 1;
-            item.style.background = "var(--accent1)";
+            item.style.background = "var(--primary)";
             item.style.transitionDelay = ""+d+"s";
         }
         else if (salary > 10000) {
@@ -89,7 +89,7 @@ let triggered = false;
 
 function doSomething(scrollPos) {
     //console.log(scrollPos);
-    if (scrollPos > 75 && salary > 0 && !triggered) {
+    if (scrollPos > 100 && salary > 0 && !triggered) {
         revealBlock(document.getElementById('savings-prompt'));
         triggered = true;
     }
