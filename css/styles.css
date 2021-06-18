@@ -70,7 +70,7 @@ body {
 }
 
 .card {
-    padding: 4em;
+    padding: 2em 0em;
     border: 1px solid #CCC;
     scroll-snap-align: center;
 }
