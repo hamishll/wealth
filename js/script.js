@@ -8,8 +8,8 @@ let cumulativeSampleSize = 0;
 let substring = "";
 let string = "";
 const data_full = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4,5,1,1,3,2,2,2,4,2,0,2,3,4,2,1];
-const data = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4];
-const data_full_total = 2975;
+const data = [863,1725,2588,3451,4314,5176,6039,6902,7764,8627,9130,9633,10137,10640,11143,11646,12149,12653,13156,13659,14173,14688,15202,15717,16231,16638,17044,17451,17857,18264,18624,18983,19343,19702,20062,20421,20781,21140,21500,21859,22278,22697,23116,23535,23954,24372,24791,25210,25629,26048,26467,26886,27305,27724,28143,28561,28980,29399,29818,30237,30778,31319,31859,32400,32941,33482,34023,34563,35104,35645,36315,36985,37655,38325,38995,39744,40493,41243,41992,42741,44027,45313,46598,47884,49170,50456,51742,53027,54313,55599,57599,61421,65244,69066,72888,76711,80533,84355,88178,92000];
+//const data_full_total = 2975;
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // DEPRECATED: Add commas to values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -39,45 +39,66 @@ document.getElementById('salary').addEventListener("keyup", function(event) {
 // Salary: Compute values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 function updateSalary() {
-    d = 0.05;
-    s = 11000;
+    // d = 0.05;
+    // s = 5000;
     cumulativeSampleSize = 0;
     document.getElementById('salary').style.animation = "none";
     salary = Number(event.target.value.replace(",",""));
     document.getElementById('salarySlider').value = salary;
-    band = (salary-s)/890;
-    for (j=0; j<band; j++) {
-        cumulativeSampleSize = cumulativeSampleSize + data_full[j];
-    }
-    if (salary >= 100000) {
+    
+    let pillars = document.querySelectorAll('.percentile');
+    
+    if (salary >= 92000) {
         userPercentile = 99;
     }
-    else if (salary < 10000){
+    else if (salary < 863){
         userPercentile = 0;
     }
     else {
-        userPercentile = Math.round(cumulativeSampleSize/data_full_total*100)-1;
+        for (j=0; j<100; j++) {
+            if (salary < data[j]) {
+                userPercentile = j;
+                updatePillars();
+                break
+            }
+            else {}
+        }
     }    
     document.getElementById('user-percentile').textContent = "" + userPercentile + "%";
     
-    document.querySelectorAll('.percentile').forEach(item => {
-        s = s + 890;
-        d = d + 0.01;
-        if (salary > s) {
-            item.style.opacity = 1;
-            item.style.background = "var(--primary)";
-            item.style.transitionDelay = ""+d+"s";
+function updatePillars() {
+    for (j=0; j<100; j++) {
+        if (userPercentile >= j) {
+            pillars[j].style.opacity = 1;
+            pillars[j].style.background = "var(--primary)";
+            pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
         }
-        else if (salary > data_full_total) {
-            item.style.transitionDelay = ""+d+"s";
-            item.style.opacity = 1;
-            item.style.background = "var(--text2)";
+        else if (userPercentile < j) {
+            pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
+            pillars[j].style.opacity = 1;
+            pillars[j].style.background = "var(--text2)";
         }
-        else {
-            item.style.background = "var(--text2)";
-        };
-    });
-    if (salary > data_full_total) {
+    } 
+}
+
+    // .forEach(item => {
+    //     s = s + 890;
+    //     d = d + 0.01;
+    //     if (salary > s) {
+    //         item.style.opacity = 1;
+    //         item.style.background = "var(--primary)";
+    //         item.style.transitionDelay = ""+d+"s";
+    //     }
+    //     else if (salary > data_full_total) {
+    //         item.style.transitionDelay = ""+d+"s";
+    //         item.style.opacity = 1;
+    //         item.style.background = "var(--text2)";
+    //     }
+    //     else {
+    //         item.style.background = "var(--text2)";
+    //     };
+    // });
+    if (salary > 1) {
         revealBlock(document.getElementById('salary-comparison'));
     };
 };
@@ -104,18 +125,21 @@ let ticking = false;
 let savings_triggered = false;
 let tips_triggered = false;
 
-document.addEventListener('scroll', function(e) {
-  last_known_scroll_position = window.scrollY;
-
-  if (!ticking) {
+document.getElementById("main").addEventListener("scroll", function(e) { 
+last_known_scroll_position = e.target.scrollTop;
+if (!ticking) {
     window.requestAnimationFrame(function() {
       doSomething(last_known_scroll_position);
       ticking = false;
     });
-
     ticking = true;
   }
+
 });
+
+// document.addEventListener('scroll', function(e) {
+//   last_known_scroll_position = window.scrollY;
+
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Scroll triggers
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -146,7 +170,7 @@ function revealBlock(item) {
 // Render bars on page load
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 for (var i = 0; i < data.length; i+=1) {
-    substring = "<div class='percentile' style='height: "+data[i]+"px'></div>"
+    substring = "<div class='percentile' style='height: "+data_full[i]+"px'></div>"
     string = string + substring;
 }
 document.getElementById('salary-distribution').innerHTML = string;

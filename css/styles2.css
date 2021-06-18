@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+  
+  .snap {
+    height: 100vh;
+    scroll-snap-align: center;
+  }
+  
+  .item1 {
+    background-color: blue;
+    font-size: 5rem;
+  }
+  
+  .item2 {
+    background-color: yellow;
+    font-size: 5rem;
+  }
+  
+  .item3 {
+    background-color: red;
+    font-size: 5rem;
+  }
