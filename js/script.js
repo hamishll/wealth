@@ -7,9 +7,12 @@ let band = 0;
 let cumulativeSampleSize = 0;
 let substring = "";
 let string = "";
-const data_full = [62,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4,5,1,1,3,2,2,2,4,2,0,2,3,4,2,1];
+let x = 0;
+let pillarsToFill = 0;
+const data_full = [4,8,14,20,27,40,55,62,80,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4,5,1,1,3,2,2,2,4,2,0,2,3,4,2,1];
+const histogram = [4,8,14,20,27,40,55,62,80,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4];
+const histogram_sum = histogram.reduce((a, b) => a + b, 0);
 const data = [863,1725,2588,3451,4314,5176,6039,6902,7764,8627,9130,9633,10137,10640,11143,11646,12149,12653,13156,13659,14173,14688,15202,15717,16231,16638,17044,17451,17857,18264,18624,18983,19343,19702,20062,20421,20781,21140,21500,21859,22278,22697,23116,23535,23954,24372,24791,25210,25629,26048,26467,26886,27305,27724,28143,28561,28980,29399,29818,30237,30778,31319,31859,32400,32941,33482,34023,34563,35104,35645,36315,36985,37655,38325,38995,39744,40493,41243,41992,42741,44027,45313,46598,47884,49170,50456,51742,53027,54313,55599,57599,61421,65244,69066,72888,76711,80533,84355,88178,92000];
-//const data_full_total = 2975;
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // DEPRECATED: Add commas to values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -24,10 +27,10 @@ function addCommas(x) {
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Salary: Slider event listener
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-document.getElementById('salarySlider').addEventListener("change", function(event) {
+document.getElementById('salarySlider').addEventListener("input", function(event) {
     salary = this.value;
     document.getElementById('salary').value = salary;
-    updateSalary();
+    updateSalary(salary);
 });
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Salary: Typed value event listener 
@@ -38,16 +41,12 @@ document.getElementById('salary').addEventListener("keyup", function(event) {
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Salary: Compute values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-function updateSalary() {
-    // d = 0.05;
-    // s = 5000;
+function updateSalary(salary) {
     cumulativeSampleSize = 0;
     document.getElementById('salary').style.animation = "none";
-    salary = Number(event.target.value.replace(",",""));
     document.getElementById('salarySlider').value = salary;
-    
-    let pillars = document.querySelectorAll('.percentile');
-    
+
+    // Work out what percentile the user is in
     if (salary >= 92000) {
         userPercentile = 99;
     }
@@ -66,19 +65,51 @@ function updateSalary() {
     }    
     document.getElementById('user-percentile').textContent = "" + userPercentile + "%";
     
+    // then work out how many pillars in the histogram to update
+    x = 0;
+    pillarsToFill = 0;
+    for (i=0; i<histogram.length; i++) {
+        x = x + histogram[i];
+        if ((x / histogram_sum) < (userPercentile / 100)) {
+            pillarsToFill = i;
+        }
+        else {};
+    }
+    // then updatePillars
+    updatePillars();
+
+    if (salary > 1) {
+        revealBlock(document.getElementById('salary-comparison'));
+    };
+}
+    
 function updatePillars() {
-    for (j=0; j<100; j++) {
-        if (userPercentile >= j) {
-            pillars[j].style.opacity = 1;
-            pillars[j].style.background = "var(--primary)";
-            pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
+    let  n = 0;
+    pillars.forEach(item => {
+        n++;
+        if (n < pillarsToFill) {
+            item.style.opacity = 1;
+            item.style.background = "var(--primary)";
+            item.style.transitionDelay = ""+(0.01*j)+"s";
         }
-        else if (userPercentile < j) {
-            pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
-            pillars[j].style.opacity = 1;
-            pillars[j].style.background = "var(--text2)";
+        else {
+            item.style.transitionDelay = ""+(0.01*j)+"s";
+            item.style.opacity = 1;
+            item.style.background = "var(--text2)";
         }
-    } 
+    }); 
+    // for (j=0; j<100; j++) {
+    //     if (userPercentile >= j) {
+    //         pillars[j].style.opacity = 1;
+    //         pillars[j].style.background = "var(--primary)";
+    //         pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
+    //     }
+    //     else if (userPercentile < j) {
+    //         pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
+    //         pillars[j].style.opacity = 1;
+    //         pillars[j].style.background = "var(--text2)";
+    //     }
+    // } 
 }
 
     // .forEach(item => {
@@ -98,10 +129,7 @@ function updatePillars() {
     //         item.style.background = "var(--text2)";
     //     };
     // });
-    if (salary > 1) {
-        revealBlock(document.getElementById('salary-comparison'));
-    };
-};
+
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Savings: Typed value event listener 
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -174,4 +202,4 @@ for (var i = 0; i < data.length; i+=1) {
     string = string + substring;
 }
 document.getElementById('salary-distribution').innerHTML = string;
-
+const pillars = document.querySelectorAll('.percentile');

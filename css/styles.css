@@ -64,20 +64,21 @@ body {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     overflow-x: hidden;
-    /* width: 90%; */
+    width: 90%;
+    max-width: 800px;
     /* max-width: 600px; */
     /* margin: 0; */
 }
 
 .card {
-    padding: 2em 0em;
-    border: 1px solid #CCC;
+    padding: 2em 0.5em;
+    /* border: 1px solid #CCC; */
     scroll-snap-align: center;
 }
 
 .snap {
 height: 100vh;
-scroll-snap-align: center;
+scroll-snap-align: top;
 }
 
 .divider {
@@ -99,6 +100,11 @@ input[type=text] {
 }
 input[type=text]:focus-visible {
     /* background: rgba(255,255,255,0.1); */
+}
+input[type=checkbox] {
+    width: 22px;
+    height: 22px;
+    margin: 45px 8px 4px 4px;
 }
 @keyframes pulse {
 	
@@ -129,8 +135,8 @@ input[type=text]:focus-visible {
     width: 2%;
     height: 10px;
     margin-right: 2px;
-    /* border-radius: 1em; */
-    transition: 1s;
+    border-radius: 1em;
+    transition: 0.1s;
 }
 .percentile-grey {
     background: var(--text2);
