@@ -73,12 +73,19 @@ body {
 .card {
     padding: 2em 0.5em;
     /* border: 1px solid #CCC; */
-    scroll-snap-align: center;
+    scroll-snap-align: start;
+}
+#tips p {
+    font-size: 0.75em;
+    color: #AAA;
+}
+#tips h3 {
+    margin-bottom: 0.5em;
 }
 
 .snap {
 height: 100vh;
-scroll-snap-align: top;
+scroll-snap-align: start;
 }
 
 .divider {
@@ -102,9 +109,9 @@ input[type=text]:focus-visible {
     /* background: rgba(255,255,255,0.1); */
 }
 input[type=checkbox] {
-    width: 22px;
-    height: 22px;
-    margin: 45px 8px 4px 4px;
+    width: 26px;
+    height: 26px;
+    margin: 45px 8px 0px 0px;
 }
 @keyframes pulse {
 	
@@ -159,7 +166,7 @@ h2 {
 }
 
 :root {
-	--delay: 0.5s;
+	--delay: 0s;
 	--duration: 1000ms;
 	--iterations: 1;
 }
@@ -251,8 +258,19 @@ h2 {
     border: none;
     height: 50px;
     border-radius: 50%; 
-    background: var(--primary);
     cursor: pointer;
+  }
+  #salarySlider::-webkit-slider-thumb {
+    background: var(--primary);
+  }
+  #salarySlider::-moz-range-thumb {
+    background: var(--primary);
+  }
+  #savingsSlider::-webkit-slider-thumb {
+    background: var(--secondary);
+  }
+  #savingsSlider::-moz-range-thumb {
+    background: var(--secondary);
   }
   
   .slider::-moz-range-thumb {
@@ -260,6 +278,5 @@ h2 {
     height: 50px;
     border: none;
     border-radius: 50%;
-    background: var(--primary);
     cursor: pointer;
   }

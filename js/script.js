@@ -32,6 +32,11 @@ document.getElementById('salarySlider').addEventListener("input", function(event
     document.getElementById('salary').value = salary;
     updateSalary(salary);
 });
+document.getElementById('savingsSlider').addEventListener("input", function(event) {
+    savings = this.value;
+    document.getElementById('savings').value = savings;
+    //updateSalary(salary);
+});
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Salary: Typed value event listener 
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -90,45 +95,17 @@ function updatePillars() {
         if (n < pillarsToFill) {
             item.style.opacity = 1;
             item.style.background = "var(--primary)";
-            item.style.transitionDelay = ""+(0.01*j)+"s";
+            item.style.transitionDelay = ""+(0.0*j)+"s";
         }
         else {
-            item.style.transitionDelay = ""+(0.01*j)+"s";
+            item.style.transitionDelay = ""+(0.0*j)+"s";
             item.style.opacity = 1;
             item.style.background = "var(--text2)";
         }
     }); 
-    // for (j=0; j<100; j++) {
-    //     if (userPercentile >= j) {
-    //         pillars[j].style.opacity = 1;
-    //         pillars[j].style.background = "var(--primary)";
-    //         pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
-    //     }
-    //     else if (userPercentile < j) {
-    //         pillars[j].style.transitionDelay = ""+(0.01*j)+"s";
-    //         pillars[j].style.opacity = 1;
-    //         pillars[j].style.background = "var(--text2)";
-    //     }
-    // } 
 }
 
-    // .forEach(item => {
-    //     s = s + 890;
-    //     d = d + 0.01;
-    //     if (salary > s) {
-    //         item.style.opacity = 1;
-    //         item.style.background = "var(--primary)";
-    //         item.style.transitionDelay = ""+d+"s";
-    //     }
-    //     else if (salary > data_full_total) {
-    //         item.style.transitionDelay = ""+d+"s";
-    //         item.style.opacity = 1;
-    //         item.style.background = "var(--text2)";
-    //     }
-    //     else {
-    //         item.style.background = "var(--text2)";
-    //     };
-    // });
+
 
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Savings: Typed value event listener 

@@ -23,7 +23,7 @@
                     £<input type="text" class="user-input-field primary" id="salary" name="salary" placeholder="XX,XXX">
                 </div>
                 <div class="m1 reveal-text d2">
-                    <input type="range" min="0" max="100000" value="11000" class="slider" id="salarySlider">
+                    <input type="range" min="0" max="100000" value="11000" class="slider bg-primary" id="salarySlider">
                 </div>
             </div>
     
@@ -40,7 +40,10 @@
             <div id="savings-prompt">
                 <h2 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h2>
                 <div class="user-input secondary reveal-text-secondary">
-                    £<input type="text" class="user-input-field secondary reveal-text-secondary" id="savings" name="salary" placeholder="XXX">
+                    £<input type="text" class="user-input-field secondary reveal-text-secondary" id="savings" name="savings" placeholder="XXX">
+                </div>
+                <div class="m1 reveal-text-secondary">
+                    <input type="range" min="0" max="4000" value="100" class="slider bg-secondary" id="savingsSlider">
                 </div>
             </div>
     
@@ -51,29 +54,48 @@
                 <divider></divider>
             </div>
         </div>
-        <div class="card snap">
-            <div class="snap">
+        <div class="card">
             <div id="tips">
                 <h2 style="display:none">Want to <stress>boost</stress> your financial health?</h2>
                 <h3 style="display:none"><input type="checkbox">Tip #1: Clear down debt before looking to save</h3>
-                <p>Compound interest has a powerful snowball effect, both in investments and in debt. Before looking to invest, make sure you've cleared
+                <p  style="display:none">Compound interest has a powerful snowball effect, both in investments and in debt. Before looking to invest, make sure you've cleared
                     any debt/credit you owe, as the interest rate will cause it to grow exponentially if not carefully managed. You can look to transfer
                     your debt to a provider with a lower interest rate, which will make it easier to keep up with payments.
                 </p>
                 <h3 style="display:none"><input type="checkbox">Tip #2: Be prepared for emergencies - keep 2x your monthly salary in your current account</h3>
-                <p>
+                <p  style="display:none">
                     You never know what might happen - a global recession, losing your job, a medical emergency - 
                 </p>
                 <h3 style="display:none"><input type="checkbox">Tip #3: Make saving automatic</h3>
                 <h3 style="display:none"><input type="checkbox">Tip #4: Don't let fees erode your returns</h3>
                 <h3 style="display:none"><input type="checkbox">Tip #5: Diversify and beware of prophets</h3>
-                <p>Different assets and sectors of the economy perform well at different times, so for reliable returns spread your investments across 
+                <p  style="display:none">Different assets and sectors of the economy perform well at different times, so for reliable returns spread your investments across 
                     multiple companies. Index funds track allow you to spread your investment across many companies by tracking major indices such as
                     the S&P 500 (which contains the 500 biggest companies in USA). This is called 'Passive Investing', and the data shows that in the 
                     long-run this out-performs 'Active Investing' (where someone picks stocks themselves). Beware of people online claiming to have
                     secret insights or 'signals' that they can sell to you - if these stock picks or 'signals' were good then these people wouldn't need your money!
                 </p>
                 
+                <h2  style="display:none">Want <stress>more</stress> great tips straight to your inbox?</h2>
+                <!-- Begin Mailchimp Signup Form -->
+                <link href="https://cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+                <style type="text/css">
+                    #mc_embed_signup{background:none; clear:left; font:14px "IBM Plex Sans",Arial,sans-serif; width:100%;font-family: 'IBM Plex Sans', sans-serif;}
+                    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                    We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                    #mc-embedded-subscribe .button {background-color: #6002ee; font-family: 'IBM Plex Sans', sans-serif;}
+                </style>
+                <div id="mc_embed_signup">
+                <form action="https://gmail.us6.list-manage.com/subscribe/post?u=b95984ff289b9514bc0860eef&amp;id=b8101d6417" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                    <div id="mc_embed_signup_scroll" >
+                    
+                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_b95984ff289b9514bc0860eef_b8101d6417" tabindex="-1" value=""></div>
+                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
