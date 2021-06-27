@@ -18,7 +18,7 @@
     <div id="main" class="container snap">
         <div class="card">
             <div  id="salary-prompt">
-                <h2 class="reveal-text">How much do you <stress>earn</stress> per year?</h2>
+                <h1 class="reveal-text">How much do you <stress>earn</stress> per year?</h1>
                 <div class="user-input primary reveal-text d1">
                     £<input type="text" class="user-input-field primary" id="salary" name="salary" placeholder="XX,XXX">
                 </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="card snap">
             <div id="savings-prompt">
-                <h2 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h2>
+                <h1 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h1>
                 <div class="user-input secondary reveal-text-secondary">
                     £<input type="text" class="user-input-field secondary reveal-text-secondary" id="savings" name="savings" placeholder="XXX">
                 </div>
@@ -49,34 +49,40 @@
     
             <div id="savings-comparison">
                 <h3 class="reveal-text-secondary" style="display:none">You save more than...</h3>
-                <h1 class="reveal-text-secondary secondary" style="display:none; animation: pulsegradient 2s infinite" id="user-percentile">XX%</h1>
+                <h1 class="reveal-text-secondary secondary" style="display:none; animation: pulsegradient 2s infinite" id="savings-percentile">XX%</h1>
                 <h3 class="reveal-text-secondary" style="display:none">...of people in the UK</h3>
                 <divider></divider>
             </div>
         </div>
         <div class="card">
             <div id="tips">
-                <h2 style="display:none">Want to <stress>boost</stress> your financial health?</h2>
-                <h3 style="display:none"><input type="checkbox">Tip #1: Clear down debt before looking to save</h3>
-                <p  style="display:none">Compound interest has a powerful snowball effect, both in investments and in debt. Before looking to invest, make sure you've cleared
+                <h1 class="reveal-text-tertiary" style="display:none">Want to <stress-tertiary>boost</stress-tertiary> your financial health?</h1>
+                <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #1: Clear down debt before looking to save</h3>
+                <p class="reveal-text-tertiary"  style="display:none">Compound interest has a powerful snowball effect, both in investments and in debt. Before looking to invest, make sure you've cleared
                     any debt/credit you owe, as the interest rate will cause it to grow exponentially if not carefully managed. You can look to transfer
                     your debt to a provider with a lower interest rate, which will make it easier to keep up with payments.
                 </p>
-                <h3 style="display:none"><input type="checkbox">Tip #2: Be prepared for emergencies - keep 2x your monthly salary in your current account</h3>
-                <p  style="display:none">
+                <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #2: Be prepared for emergencies - keep 2x your monthly salary in your current account</h3>
+                <p class="reveal-text-tertiary"  style="display:none">
                     You never know what might happen - a global recession, losing your job, a medical emergency - 
                 </p>
-                <h3 style="display:none"><input type="checkbox">Tip #3: Make saving automatic</h3>
-                <h3 style="display:none"><input type="checkbox">Tip #4: Don't let fees erode your returns</h3>
-                <h3 style="display:none"><input type="checkbox">Tip #5: Diversify and beware of prophets</h3>
-                <p  style="display:none">Different assets and sectors of the economy perform well at different times, so for reliable returns spread your investments across 
+                <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #3: Make saving automatic</h3>
+                <p  class="reveal-text-tertiary" style="display:none">
+                    When it comes to saving, consistency is key. 
+                </p>
+                <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #4: Don't let fees erode your returns</h3>
+                <p  class="reveal-text-tertiary" style="display:none">
+                    When you buy shares, there are typically dealing fees
+                </p>
+                <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #5: Diversify and beware of prophets</h3>
+                <p class="reveal-text-tertiary"  style="display:none">Different assets and sectors of the economy perform well at different times, so for reliable returns spread your investments across 
                     multiple companies. Index funds track allow you to spread your investment across many companies by tracking major indices such as
                     the S&P 500 (which contains the 500 biggest companies in USA). This is called 'Passive Investing', and the data shows that in the 
                     long-run this out-performs 'Active Investing' (where someone picks stocks themselves). Beware of people online claiming to have
                     secret insights or 'signals' that they can sell to you - if these stock picks or 'signals' were good then these people wouldn't need your money!
                 </p>
                 
-                <h2  style="display:none">Want <stress>more</stress> great tips straight to your inbox?</h2>
+                <h2 class="reveal-text-tertiary"  style="display:none">Want <stress-tertiary>more</stress-tertiary> great tips straight to your inbox?</h2>
                 <!-- Begin Mailchimp Signup Form -->
                 <link href="https://cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
                 <style type="text/css">

@@ -3,6 +3,7 @@
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 let salary = 0;
 let savings = 0;
+let savingsPercentile = 0;
 let band = 0;
 let cumulativeSampleSize = 0;
 let substring = "";
@@ -13,6 +14,8 @@ const data_full = [4,8,14,20,27,40,55,62,80,94,112,117,114,113,124,123,103,97,11
 const histogram = [4,8,14,20,27,40,55,62,80,94,112,117,114,113,124,123,103,97,119,91,92,75,75,69,72,69,74,59,65,56,58,43,52,38,36,43,38,41,39,30,29,30,27,27,31,33,24,21,23,20,14,19,17,15,11,8,11,17,11,9,9,7,5,8,6,6,7,5,6,5,6,3,2,9,7,5,3,3,4,4,3,4,6,5,3,2,2,1,2,4,5,4];
 const histogram_sum = histogram.reduce((a, b) => a + b, 0);
 const data = [863,1725,2588,3451,4314,5176,6039,6902,7764,8627,9130,9633,10137,10640,11143,11646,12149,12653,13156,13659,14173,14688,15202,15717,16231,16638,17044,17451,17857,18264,18624,18983,19343,19702,20062,20421,20781,21140,21500,21859,22278,22697,23116,23535,23954,24372,24791,25210,25629,26048,26467,26886,27305,27724,28143,28561,28980,29399,29818,30237,30778,31319,31859,32400,32941,33482,34023,34563,35104,35645,36315,36985,37655,38325,38995,39744,40493,41243,41992,42741,44027,45313,46598,47884,49170,50456,51742,53027,54313,55599,57599,61421,65244,69066,72888,76711,80533,84355,88178,92000];
+const savings_histogram = [35, 5, 5.5, 5.5, 5, 4.5, 3.5, 3, 2.5, 2.5, 2.5, 2.5, 2, 2, 2, 2, 1.5, 1.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+const savings_values = [0, 20, 40, 60, 80, 100, 120, 140, 160, 170, 180, 190, 210, 240, 260, 290, 310, 330, 360, 380, 400, 430, 450, 470, 490, 510, 530, 560, 600, 650, 700, 750, 800, 840, 880, 900, 940, 980, 1020, 1060, 1100, 1200, 1250, 1300, 1400, 1400, 1500, 1550, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700]
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // DEPRECATED: Add commas to values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -31,11 +34,6 @@ document.getElementById('salarySlider').addEventListener("input", function(event
     salary = this.value;
     document.getElementById('salary').value = salary;
     updateSalary(salary);
-});
-document.getElementById('savingsSlider').addEventListener("input", function(event) {
-    savings = this.value;
-    document.getElementById('savings').value = savings;
-    //updateSalary(salary);
 });
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Salary: Typed value event listener 
@@ -105,8 +103,15 @@ function updatePillars() {
     }); 
 }
 
-
-
+// `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+// Savings: Slider event listener 
+// ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+document.getElementById('savingsSlider').addEventListener("input", function(event) {
+    updateSavings(this);
+    document.getElementById('savings').value = savings;
+    document.getElementById('savings').style.animation = "none";
+    //updateSalary(salary);
+});
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Savings: Typed value event listener 
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -119,8 +124,22 @@ document.getElementById('savings').addEventListener("keyup", function(event) {
 // Savings: Update values
 // ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 function updateSavings(item) {
+    // for (j=0; j<savings_values.length(); j++) {
+    //     if (savings < savings_values)
+    // }
     savings = item.value;
+    savings_values.forEach(calculatePercentile);
+    if (savings > 1) {
+        revealBlock(document.getElementById('savings-comparison'));
+    };
+    document.getElementById('savings-percentile').textContent = "" + savingsPercentile + "%";
 };
+function calculatePercentile(item, index) {
+    if (savings > item) {
+        savingsPercentile = 40 + index;
+    }
+    else {}
+}
 
 // `````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 // Scroll event listener

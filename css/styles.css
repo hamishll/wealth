@@ -35,6 +35,10 @@ stress-secondary {
     color: var(--secondary);
     font-style: italic;
 }
+stress-tertiary {
+    color: var(--accent1);
+    font-style: italic;
+}
 .m1 {
     margin-top: 1em;
 }
@@ -206,6 +210,9 @@ h2 {
 }
 .reveal-text-secondary::after {
     background-color: var(--secondary) !important;
+}
+.reveal-text-tertiary::after {
+    background-color: var(--accent1) !important;
 }
 @keyframes clip-text {
 	from {
