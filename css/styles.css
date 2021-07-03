@@ -40,7 +40,7 @@ stress-tertiary {
     font-style: italic;
 }
 .m1 {
-    margin-top: 1em;
+    margin-top: 0.5em;
 }
 
 html {
@@ -136,7 +136,7 @@ input[type=checkbox] {
 }
 
 #salary-distribution {
-    margin-top: 1.5em;
+    margin-top: 1em;
     display: flex;
     align-items: flex-end;
 }
@@ -166,7 +166,7 @@ input[type=checkbox] {
     opacity: 0;
 }
 h2 {
-
+    margin: 0.5em 0em;
 }
 
 :root {
