@@ -18,7 +18,7 @@
     <div id="main" class="container snap">
         <div class="card">
             <div  id="salary-prompt">
-                <h1 class="reveal-text">How much do you <stress>earn</stress> per year?</h1>
+                <h2 class="reveal-text">How much do you <stress>earn</stress> per year?</h2>
                 <div class="user-input primary reveal-text d1">
                     £<input type="text" class="user-input-field primary" id="salary" name="salary" placeholder="XX,XXX">
                 </div>
@@ -38,7 +38,7 @@
         </div>
         <div class="card snap">
             <div id="savings-prompt">
-                <h1 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h1>
+                <h2 class="reveal-text-secondary">How much do you <stress-secondary>save</stress-secondary> per month?</h2>
                 <div class="user-input secondary reveal-text-secondary">
                     £<input type="text" class="user-input-field secondary reveal-text-secondary" id="savings" name="savings" placeholder="XXX">
                 </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="card">
             <div id="tips">
-                <h1 class="reveal-text-tertiary" style="display:none">Want to <stress-tertiary>boost</stress-tertiary> your financial health?</h1>
+                <h2 class="reveal-text-tertiary" style="display:none">Want to <stress-tertiary>boost</stress-tertiary> your financial health?</h2>
                 <h3 class="reveal-text-tertiary" style="display:none"><input type="checkbox">Tip #1: Clear down debt before looking to save</h3>
                 <p class="reveal-text-tertiary"  style="display:none">Compound interest has a powerful snowball effect, both in investments and in debt. Before looking to invest, make sure you've cleared
                     any debt/credit you owe, as the interest rate will cause it to grow exponentially if not carefully managed. You can look to transfer
@@ -108,4 +108,28 @@
     
     
     <script src="js/script.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyCliOvjY5roJ931_7w03HxlaR_5lCzNAnE",
+    authDomain: "wealth-b0d60.firebaseapp.com",
+    projectId: "wealth-b0d60",
+    storageBucket: "wealth-b0d60.appspot.com",
+    messagingSenderId: "176766222950",
+    appId: "1:176766222950:web:cd1be31e6d069f1bbba3a7",
+    measurementId: "G-Q3P9DZ0REV"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </body>
