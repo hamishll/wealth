@@ -92,9 +92,9 @@ height: 100vh;
 scroll-snap-align: start;
 }
 
-.divider {
+.m2 {
     /* border-bottom: 5px solid var(--text2); */
-    margin-top: 2em;
+    margin-bottom: 4em;
 }
 input[type=text] {
     background:transparent;
