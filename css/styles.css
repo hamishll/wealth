@@ -65,17 +65,17 @@ body {
   }
 
 .container {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: y proximity;
     overflow-y: scroll;
     overflow-x: hidden;
-    width: 90%;
+    width: 95%;
     max-width: 800px;
     /* max-width: 600px; */
     /* margin: 0; */
 }
 
 .card {
-    padding: 2em 0.5em;
+    padding: 0.5em 0.5em;
     /* border: 1px solid #CCC; */
     scroll-snap-align: start;
 }
